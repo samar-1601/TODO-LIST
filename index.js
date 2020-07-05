@@ -10,13 +10,13 @@ function getAndUpdate()
     console.log('adding');
     title = document.getElementById('title').value;
     description = document.getElementById('description').value;
-    if(localStorage.getItem('itemsJson') == null && title !=null)
+    if(localStorage.getItem('itemsJson') == null && title !='')
     {
         taskJsonArray = [];
         taskJsonArray.push([title,description]);
         localStorage.setItem('itemsJson',JSON.stringify(taskJsonArray));
     }
-    else if(title != null){
+    else if(title != ''){
         taskJsonArrayString = localStorage.getItem('itemsJson');
         taskJsonArray = JSON.parse(taskJsonArrayString);
         taskJsonArray.push([title,description]);
@@ -27,7 +27,7 @@ function getAndUpdate()
 }
 function update()
 {
-    if(localStorage.getItem('itemsJson') == null && title !=null)
+    if(localStorage.getItem('itemsJson') == null)
     {
         taskJsonArray = [];
         localStorage.setItem('itemsJson',JSON.stringify(taskJsonArray));
@@ -43,10 +43,8 @@ function update()
 let tableBody = document.getElementById('tableBody');
 dataString = '';
 taskJsonArray.forEach((element,index) => {
-    if(element[0] == '')
-    {   
-        continue;
-    }
+    if(element[0] == '');
+    
     else
     dataString += `
     <tr>
